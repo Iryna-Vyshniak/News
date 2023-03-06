@@ -1,1 +1,62 @@
-@import '~node_modules/modern-normalize/modern-normalize.css';
+html {
+    min-height: 100vh;
+}
+
+body {
+    min-height: 100vh;
+    margin: 16px;
+    font-family: 'Space Grotesk', sans-serif;
+    background: #220d0d;
+    color: #212121;
+    font-size: calc($index * .6); // responsive fz
+    line-height: 1.5;
+    transition: all 250ms ease-in-out;
+}
+
+input {
+    padding: 8px;
+    font: inherit;
+}
+
+button {
+    padding: 8px 12px;
+    cursor: pointer;
+}
+
+ul {
+    list-style: none;
+}
+
+
+[class*="__container"] {
+    max-width: 100rem;
+    margin: 0 auto;
+    padding-left: 20px;
+    padding-right: 20px;
+
+    @media screen and (min-width: 480px) {
+        max-width: 550px;
+    }
+
+    @include tablet {
+        max-width: 1024px;
+        padding-left: 32px;
+        padding-right: 32px;
+    }
+
+    @include desktop {
+        width: 100%;
+        max-width: 1280px;
+    }
+}
+
+img {
+    display: block;
+    margin: 0;
+    max-width: 100%;
+
+}
+
+main {
+    padding-top: 6.0625rem;
+}
