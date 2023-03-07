@@ -28,6 +28,7 @@ function onSubmit(e) {
     .then(markup => (list.innerHTML = markup))
     .catch(onError)
     .finally(() => form.reset());
+  console.log(document.querySelector('li:nth-child(3)'));
 }
 
 function onError(err) {
@@ -43,7 +44,32 @@ fetch(URL_LIST_NEWS)
     console.log(results);
     insertContent(results);
   })
-  .catch(onError);
+  .catch(onError)
+  .finally(() => {
+    const contentEls = document.querySelectorAll('.card__content');
+    const maxHeight =
+      parseInt(window.getComputedStyle(contentEls[0]).lineHeight) * 20; // максимальна висота контейнера (20 рядки тексту)
+    contentEls.forEach(contentEl => {
+      const contentText = contentEl.innerText;
+      if (contentText.length > 350) {
+        contentEl.classList.add('long-text'); // додає клас long-text, якщо довжина тексту перевищує 350 символів
+      }
+      const lines = Math.ceil(
+        contentEl.clientHeight /
+          parseInt(window.getComputedStyle(contentEl).lineHeight)
+      );
+      if (lines > 20) {
+        const maxLength = 350;
+        const ellipsis = '...';
+        if (contentText.length > maxLength) {
+          const truncatedText = contentText
+            .substring(0, maxLength)
+            .replace(/(\.|!|\?)\s/g, '$1' + ellipsis + ' ');
+          contentEl.innerText = truncatedText + ellipsis;
+        }
+      }
+    });
+  });
 
 // --------------NEWS API----------------------------------------------------------------------------
 
