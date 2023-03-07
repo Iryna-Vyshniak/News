@@ -110,7 +110,7 @@
     display: grid;
     //gap: .525rem;
     grid-gap: clamp(1rem, 5vw, 24px);
-    grid-template-columns: repeat(auto-fit, minmax(18.75rem, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 18.75rem), 1fr));
     grid-auto-flow: dense;
     place-content: center;
 }
@@ -137,13 +137,14 @@
         padding: 0px 0px 90% 0px;
         margin: 0px 0px 20px 0px;
 
+        // img not cover, because very bad quality photos!!!
         img {
             width: 100%;
             height: 100%;
             position: absolute;
             top: 0;
             left: 0;
-            object-fit: cover;
+            object-fit: contain;
         }
     }
 
@@ -197,7 +198,7 @@
     height: auto;
     margin-top: 0;
     margin-bottom: 0;
-    background: linear-gradient(to top, #000 0, transparent max(20%, 20vw));
+    background: linear-gradient(to top, #370000c2 0, transparent max(20%, 20vw));
 }
 
 .card__category-data {
@@ -212,7 +213,7 @@
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
-    text-fill-color: transparent;
+    //text-fill-color: transparent;
 }
 
 .card__content-wrapper {
