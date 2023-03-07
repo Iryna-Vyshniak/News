@@ -223,6 +223,17 @@
     text-fill-color: transparent;
 }
 
+.card__category-info {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    flex: 1 1 auto;
+    margin-bottom: 20px;
+    padding: 8px;
+    color: #5f0505;
+    text-shadow: 1px 1px 1px #fff;
+}
 
 
 .card__title {
@@ -233,6 +244,7 @@
 }
 
 .card__author {
+    display: flex;
     color: #5f0505;
     text-shadow: 1px 1px 1px #fff;
 }

@@ -34,13 +34,26 @@ function onError(err) {
   console.log(err);
 }
 
-fetch(URL_LIST_NEWS, optionsListNews)
+fetch(URL_LIST_NEWS)
   .then(response => response.json())
-  .then(({ articles }) => {
+  .then(({ results }) => {
     // if (!ok) {
     //   throw new Error(`Error fetching`);
     // }
-    console.log(articles);
-    insertContent(articles);
+    console.log(results);
+    insertContent(results);
   })
   .catch(onError);
+
+// --------------NEWS API----------------------------------------------------------------------------
+
+// fetch(URL_LIST_NEWS, optionsListNews)
+//   .then(response => response.json())
+//   .then(({ articles }) => {
+//     // if (!ok) {
+//     //   throw new Error(`Error fetching`);
+//     // }
+//     console.log(articles);
+//     insertContent(articles);
+//   })
+//   .catch(onError);
