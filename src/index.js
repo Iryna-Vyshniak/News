@@ -24,8 +24,7 @@ function onSubmit(e) {
         throw new Error('Not articles found');
       }
       return results.reduce(
-        (markup, article, index) =>
-          markup + createMarkupArticle(article, value),
+        (markup, article) => markup + createMarkupArticle(article),
         ''
       );
     })
