@@ -1,6 +1,6 @@
 // ----- NEWS DATA ----------------------------------------------------------------
 export function fetchSearchAPI(query) {
-  const SEARCH_URL = `https://newsdata.io/api/1/news?apikey=pub_18476a7917762b26ebbb61a44ce2bbbc974b2&category=top,politics,world,environment,entertainment&language=uk,en&q=${query}`;
+  const SEARCH_URL = `https://newsdata.io/api/1/news?apikey=pub_18497859bbccdd32bf21739a29c0d99c7cd35&category=top,politics,world,environment,entertainment&language=uk,en&q=${query}`;
   return fetch(SEARCH_URL).then(response => response.json());
 }
 
@@ -15,7 +15,7 @@ export function fetchSearchAPI(query) {
 // }
 
 // ----------------------------------------------------------------
-export const URL_LIST_NEWS = `https://newsdata.io/api/1/news?apikey=pub_18476a7917762b26ebbb61a44ce2bbbc974b2&country=ua&category=top&language=uk`;
+export const URL_LIST_NEWS = `https://newsdata.io/api/1/news?apikey=pub_18497859bbccdd32bf21739a29c0d99c7cd35&country=ua&category=top&language=uk`;
 
 // --------------NEWS API----------------------------------------------------------------------------
 
