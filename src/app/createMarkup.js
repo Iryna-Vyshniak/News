@@ -11,18 +11,20 @@ const createListItem = ({
   link,
   keywords,
   source_id,
+  description,
 }) => /* html */ `
 <li class="news__card--main card--main stacked featured">
 <div class="card__category-data">
 <span class="card__category">${keywords}</span>
 <span class="card__date">${pubDate}</span>
 </div>
- <div class="card__content">
+ <div class="card__content-wrapper">
   <h2 class="card__title">${title}</h2>
- ${content ? `<p class="card__desc">${content.slice(0, 300)}...</p>` : ''}
+ ${description ? `<p class="card__descr">${description}</p>` : ''}
+ ${content ? `<p class="card__content">${content.slice(0, 300)}...</p>` : ''}
  <a class="card__link" href="${link}" target="_blank">Read more</a>
 <div class="card__category-info">
-<p class="card__author">${creator}</p>
+${creator ? `<p class="card__author">${creator}</p>` : ''}
 <p class="card__source">${source_id}</p>
 </div>
   </div>
@@ -54,7 +56,7 @@ export const insertContent = array => {
 // <span class="card__category">${name}</span>
 // <span class="card__date">${publishedAt.split('T').join(' ').slice(0, -4)}</span>
 // </div>
-//  <div class="card__content">
+//  <div class="card__content-wrapper">
 //   <h2 class="card__title">${title}</h2>
 //  ${description ? `<p class="card__desc">${description}</p>` : ''}
 // <p class="card__author">${author ?? 'Anonymous'}</p>
