@@ -1,3 +1,5 @@
+import { setImages, setTitleImages } from './setImages';
+
 const list = document.querySelector('[data-list]');
 
 // ----- main page -------------------------------------------------------------------------
@@ -96,8 +98,8 @@ export function createMarkupArticle({
   return /* html */ `
 <li class="news__card--main card--main stacked featured">
       <div class="card__category-data">
-        <span class="card__category">${keywords[0]}</span>
-        <span class="card__date">${pubDate}</span>
+       ${keywords ? `<span class="card__category">${keywords[0]}</span>` : ''}
+       ${pubDate ? `<span class="card__date">${pubDate}</span>` : ''}
       </div>
       ${
         image_url
@@ -105,7 +107,9 @@ export function createMarkupArticle({
       <div class="card__image">
         <img src="${image_url}" alt="${keywords}" loading="lazy" />
       </div>`
-          : ''
+          : `<div class="card__image">
+        <img src="${defaultImg}" alt="${keywords}" loading="lazy" />
+      </div>`
       }
       <div class="card__content-wrapper">
         <h2 class="card__title">${title}</h2>
