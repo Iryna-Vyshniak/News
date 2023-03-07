@@ -6,6 +6,7 @@ import { fetchSearchAPI, optionsListNews, URL_LIST_NEWS } from './app/newsAPI';
 import { createMarkupArticle, insertContent } from './app/createMarkup';
 
 const list = document.querySelector('[data-list]');
+console.log(list);
 const form = document.querySelector('#form');
 
 form.addEventListener('submit', onSubmit);
@@ -14,21 +15,49 @@ function onSubmit(e) {
   e.preventDefault();
 
   const value = e.currentTarget.elements.news.value.trim();
-
+  console.log(value);
   fetchSearchAPI(value)
-    .then(({ articles }) => {
-      if (articles.length === 0) {
-        throw new Error('No articles');
+    .then(({ results }) => {
+      console.log(results.length);
+      if (results.length === 0) {
+        throw new Error('Not articles found');
       }
-      return articles.reduce(
+      return results.reduce(
         (markup, article) => markup + createMarkupArticle(article),
         ''
       );
     })
-    .then(markup => (list.innerHTML = markup))
+    .then(markup => {
+      console.log(markup);
+      list.innerHTML = markup;
+    })
     .catch(onError)
-    .finally(() => form.reset());
-  console.log(document.querySelector('li:nth-child(3)'));
+    .finally(() => {
+      const contentEls = document.querySelectorAll('.card__content');
+      const maxHeight =
+        parseInt(window.getComputedStyle(contentEls[0]).lineHeight) * 20;
+      contentEls.forEach(contentEl => {
+        const contentText = contentEl.innerText;
+        if (contentText.length > 800) {
+          contentEl.classList.add('long-text');
+        }
+        const lines = Math.ceil(
+          contentEl.clientHeight /
+            parseInt(window.getComputedStyle(contentEl).lineHeight)
+        );
+        if (lines > 20) {
+          const maxLength = 800;
+          const ellipsis = '...';
+          if (contentText.length > maxLength) {
+            const truncatedText = contentText
+              .substring(0, maxLength)
+              .replace(/(\.|!|\?)\s/g, '$1' + ellipsis + ' ');
+            contentEl.innerText = truncatedText + ellipsis;
+          }
+        }
+      });
+      form.reset();
+    });
 }
 
 function onError(err) {
@@ -71,7 +100,7 @@ fetch(URL_LIST_NEWS)
     });
   });
 
-// --------------NEWS API----------------------------------------------------------------------------
+// --------------NEWS API---------------------------------------
 
 // fetch(URL_LIST_NEWS, optionsListNews)
 //   .then(response => response.json())
@@ -83,3 +112,28 @@ fetch(URL_LIST_NEWS)
 //     insertContent(articles);
 //   })
 //   .catch(onError);
+
+// function onSubmit(e) {
+//   e.preventDefault();
+
+//   const value = e.currentTarget.elements.news.value.trim();
+
+//   fetchSearchAPI(value)
+//     .then(({ articles }) => {
+//       if (articles.length === 0) {
+//         throw new Error('No articles');
+//       }
+//       return articles.reduce(
+//         (markup, article) => markup + createMarkupArticle(article),
+//         ''
+//       );
+//     })
+//     .then(markup => (list.innerHTML = markup))
+//     .catch(onError)
+//     .finally(() => form.reset());
+//   console.log(document.querySelector('li:nth-child(3)'));
+// }
+
+// function onError(err) {
+//   console.log(err);
+// }

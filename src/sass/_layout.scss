@@ -108,8 +108,8 @@
 
 .news__list {
     display: grid;
-    gap: .525rem;
-    grid-gap: clamp(.525rem, 2vw, 24px);
+    //gap: .525rem;
+    grid-gap: clamp(1rem, 5vw, 24px);
     grid-template-columns: repeat(auto-fit, minmax(18.75rem, 1fr));
     grid-auto-flow: dense;
     place-content: center;

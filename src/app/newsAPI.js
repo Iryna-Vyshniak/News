@@ -1,6 +1,6 @@
 // ----- NEWS DATA ----------------------------------------------------------------
 export function fetchSearchAPI(query) {
-  const SEARCH_URL = `https://newsdata.io/api/1/news?apikey=pub_18476a7917762b26ebbb61a44ce2bbbc974b2&country=ua&category=top&language=uk`;
+  const SEARCH_URL = `https://newsdata.io/api/1/news?apikey=pub_18476a7917762b26ebbb61a44ce2bbbc974b2&category=top,politics,world,environment,entertainment&language=uk,en&q=${query}`;
   return fetch(SEARCH_URL).then(response => response.json());
 }
 
