@@ -22,7 +22,7 @@ const createListItem = ({
 </div>
  <div class="card__content-wrapper">
   <h2 class="card__title">${title}</h2>
- ${description ? `<p class="card__descr">${description}</p>` : ''}
+ ${description ? `<p class="card__descr">${description.slice(0, 250)}</p>` : ''}
  <div class="content-wrapper">
  ${content ? `<p class="card__content">${content}</p>` : ''}
  </div>
@@ -113,7 +113,11 @@ export function createMarkupArticle({
       }
       <div class="card__content-wrapper">
         <h2 class="card__title">${title}</h2>
-        ${description ? `<p class="card__descr">${description}</p>` : ''}
+        ${
+          description
+            ? `<p class="card__descr">${description.slice(0, 250)}</p>`
+            : ''
+        }
         <div class="content-wrapper">
           ${content ? `<p class="card__content">${content}</p>` : ''}
         </div>

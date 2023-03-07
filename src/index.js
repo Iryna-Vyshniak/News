@@ -2,7 +2,7 @@ import { format } from 'date-fns';
 import { uk } from 'date-fns/locale';
 
 import { fetchSearchAPI, optionsListNews, URL_LIST_NEWS } from './app/newsAPI';
-//import { setImages, setTitleImages } from './app/setImages';
+import { setImages, setTitleImages } from './app/setImages';
 import { createMarkupArticle, insertContent } from './app/createMarkup';
 
 const list = document.querySelector('[data-list]');
@@ -16,19 +16,20 @@ function onSubmit(e) {
 
   const value = e.currentTarget.elements.news.value.trim();
   console.log(value);
+
   fetchSearchAPI(value)
     .then(({ results }) => {
       console.log(results.length);
-      if (results.length === 0) {
+      if (!results.length) {
         throw new Error('Not articles found');
       }
       return results.reduce(
-        (markup, article) => markup + createMarkupArticle(article),
+        (markup, article, index) =>
+          markup + createMarkupArticle(article, value),
         ''
       );
     })
     .then(markup => {
-      console.log(markup);
       list.innerHTML = markup;
     })
     .catch(onError)
@@ -38,7 +39,7 @@ function onSubmit(e) {
         parseInt(window.getComputedStyle(contentEls[0]).lineHeight) * 20;
       contentEls.forEach(contentEl => {
         const contentText = contentEl.innerText;
-        if (contentText.length > 800) {
+        if (contentText.length > 400) {
           contentEl.classList.add('long-text');
         }
         const lines = Math.ceil(
@@ -46,7 +47,7 @@ function onSubmit(e) {
             parseInt(window.getComputedStyle(contentEl).lineHeight)
         );
         if (lines > 20) {
-          const maxLength = 800;
+          const maxLength = 400;
           const ellipsis = '...';
           if (contentText.length > maxLength) {
             const truncatedText = contentText
