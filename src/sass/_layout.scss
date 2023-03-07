@@ -187,18 +187,6 @@
 
 }
 
-.card__content {
-    position: relative;
-    top: -25px;
-    align-self: end;
-    margin: .1rem 1.8rem 2rem;
-    padding: .5rem;
-    background: linear-gradient(226.49deg, #FFFFFF 7.53%, #FFCD9E 96.28%);
-    box-shadow: -1px -1px 1px #FFFFFF, 1px 1px 1px rgba(0, 0, 0, 0.2);
-    font-size: 0.8rem;
-}
-
-
 .card__img {
     // aspect-ratio: 1 / 1.25; // 100%
     object-fit: cover;
@@ -223,18 +211,21 @@
     text-fill-color: transparent;
 }
 
-.card__category-info {
+.card__content-wrapper {
+    position: relative;
+    top: -25px;
     display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 10px;
-    flex: 1 1 auto;
-    margin-bottom: 20px;
-    padding: 8px;
-    color: #5f0505;
-    text-shadow: 1px 1px 1px #fff;
+    flex-direction: column;
+    gap: 15px;
+    flex-grow: 1;
+    align-self: end;
+    margin: .1rem 1.8rem 2rem;
+    padding: .5rem;
+    gap: 15px;
+    background: linear-gradient(226.49deg, #FFFFFF 7.53%, #FFCD9E 96.28%);
+    box-shadow: -1px -1px 1px #FFFFFF, 1px 1px 1px rgba(0, 0, 0, 0.2);
+    font-size: 0.8rem;
 }
-
 
 .card__title {
     font-size: 1.25rem;
@@ -243,12 +234,9 @@
     text-shadow: 1px 1px 1px #fff;
 }
 
-.card__author {
-    display: flex;
-    color: #5f0505;
-    text-shadow: 1px 1px 1px #fff;
+.card__descr {
+    font-weight: 700;
 }
-
 
 .card__link {
     display: block;
@@ -267,8 +255,28 @@
     text-decoration: none;
 
     &:hover {
-        text-decoration: none;
-        color: #ECECEC;
-        background-color: transparent;
+        border: 1px solid linear-gradient(226.49deg, #E5941F 7.53%, #D66801 96.28%);
+        color: #D66801;
+        background: transparent;
     }
+}
+
+.card__category-info {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    flex: 1 1 auto;
+    margin-bottom: 20px;
+    padding: 8px;
+    color: #5f0505;
+    text-shadow: 1px 1px 1px #fff;
+}
+
+
+.card__author {
+    display: flex;
+    margin: 0;
+    color: #5f0505;
+    text-shadow: 1px 1px 1px #fff;
 }
