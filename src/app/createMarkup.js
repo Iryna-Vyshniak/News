@@ -21,8 +21,12 @@ const createListItem = ({
  <div class="card__content-wrapper">
   <h2 class="card__title">${title}</h2>
  ${description ? `<p class="card__descr">${description}</p>` : ''}
- ${content ? `<p class="card__content">${content.slice(0, 300)}...</p>` : ''}
+ <div class="content-wrapper">
+ ${content ? `<p class="card__content">${content}</p>` : ''}
+ </div>
+ <div class="card__link-border">
  <a class="card__link" href="${link}" target="_blank">Read more</a>
+ </div>
 <div class="card__category-info">
 ${creator ? `<p class="card__author">${creator}</p>` : ''}
 <p class="card__source">${source_id}</p>
