@@ -51,7 +51,7 @@ fetch(URL_LIST_NEWS)
       parseInt(window.getComputedStyle(contentEls[0]).lineHeight) * 20; // максимальна висота контейнера (20 рядки тексту)
     contentEls.forEach(contentEl => {
       const contentText = contentEl.innerText;
-      if (contentText.length > 350) {
+      if (contentText.length > 800) {
         contentEl.classList.add('long-text'); // додає клас long-text, якщо довжина тексту перевищує 350 символів
       }
       const lines = Math.ceil(
@@ -59,7 +59,7 @@ fetch(URL_LIST_NEWS)
           parseInt(window.getComputedStyle(contentEl).lineHeight)
       );
       if (lines > 20) {
-        const maxLength = 350;
+        const maxLength = 800;
         const ellipsis = '...';
         if (contentText.length > maxLength) {
           const truncatedText = contentText
