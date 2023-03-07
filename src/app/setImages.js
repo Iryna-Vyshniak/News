@@ -1,13 +1,48 @@
 import { createClient } from 'pexels';
 
+// export function setImages(query) {
+//   const API_KEY = '34184941-e8330cc74475028632abc6a98';
+
+//   const randomNumber = max => {
+//     return Math.floor(Math.random() * max);
+//   };
+
+//   return fetch(
+//     `https://pixabay.com/api/?key=${API_KEY}&q=${query}&image_type=photo`
+//   )
+//     .then(response => response.json())
+//     .then(data => {
+//       let defaultImg = `https://ik.imagekit.io/irinavn2011/ukraine-7047830_1920.jpg?ik-sdk-version=javascript-1.4.3&updatedAt=1678121370881`;
+
+//       const images = [];
+//       const usedImages = new Set();
+//       for (let i = 0; i < 50; i++) {
+//         let imgIndex = randomNumber(data.hits.length);
+//         let img = data.hits[imgIndex];
+//         while (usedImages.has(img.largeImageURL)) {
+//           imgIndex = randomNumber(data.hits.length);
+//           img = data.hits[imgIndex];
+//         }
+//         images.push(img);
+//         usedImages.add(img.largeImageURL);
+//       }
+//       console.log(images);
+//       return images;
+//     });
+// }
+
+// next variant
+
 export function setImages(query) {
-  const API_KEY = '28194821-49041d995ecd04735d9e20d11';
+  const API_KEY = '34184941-e8330cc74475028632abc6a98';
 
   const randomNumber = max => {
     return Math.floor(Math.random() * max);
   };
 
-  fetch(`https://pixabay.com/api/?key=${API_KEY}&q=${query}&image_type=photo`)
+  return fetch(
+    `https://pixabay.com/api/?key=${API_KEY}&q=${query}&image_type=photo`
+  )
     .then(response => response.json())
     .then(data => {
       console.log('data', data);
@@ -18,7 +53,6 @@ export function setImages(query) {
         image.src =
           data.hits[randomNumber(data.hits.length)]?.largeImageURL ??
           defaultImg;
-        console.log(image.src);
       }
     });
 }
