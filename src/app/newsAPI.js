@@ -1,6 +1,6 @@
 // ----- NEWS DATA ----------------------------------------------------------------
 export function fetchSearchAPI(query) {
-  const SEARCH_URL = `https://newsdata.io/api/1/news?apikey=pub_18443bdd72355201d0eb18fc583941d9bd219&country=ua&category=top&language=uk`;
+  const SEARCH_URL = `https://newsdata.io/api/1/news?apikey=pub_18476a7917762b26ebbb61a44ce2bbbc974b2&country=ua&category=top&language=uk`;
   return fetch(SEARCH_URL).then(response => response.json());
 }
 
@@ -15,7 +15,7 @@ export function fetchSearchAPI(query) {
 // }
 
 // ----------------------------------------------------------------
-export const URL_LIST_NEWS = `https://newsdata.io/api/1/news?apikey=pub_18443bdd72355201d0eb18fc583941d9bd219&country=ua&category=top&language=uk`;
+export const URL_LIST_NEWS = `https://newsdata.io/api/1/news?apikey=pub_18476a7917762b26ebbb61a44ce2bbbc974b2&country=ua&category=top&language=uk`;
 
 // --------------NEWS API----------------------------------------------------------------------------
 
