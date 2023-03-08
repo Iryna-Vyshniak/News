@@ -1,6 +1,6 @@
 import { format } from 'date-fns';
 import { uk } from 'date-fns/locale';
-
+import debounce from 'lodash.debounce';
 import { fetchSearchAPI, optionsListNews, URL_LIST_NEWS } from './app/newsAPI';
 import { setImages, setTitleImages } from './app/setImages';
 import { createMarkupArticle, insertContent } from './app/createMarkup';
@@ -9,7 +9,7 @@ const list = document.querySelector('[data-list]');
 console.log(list);
 const form = document.querySelector('#form');
 
-form.addEventListener('submit', onSubmit);
+form.addEventListener('submit', debounce(onSubmit), 300);
 
 function onSubmit(e) {
   e.preventDefault();
