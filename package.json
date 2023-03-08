@@ -22,6 +22,7 @@
     "lodash.debounce": "^4.0.8",
     "modern-normalize": "^1.1.0",
     "newsapi": "^2.4.1",
+    "notiflix": "^3.2.6",
     "pexels": "^1.4.0"
   },
   "devDependencies": {
