@@ -1,21 +1,23 @@
 import { format } from 'date-fns';
 import { uk } from 'date-fns/locale';
 import debounce from 'lodash.debounce';
+import { Report } from 'notiflix/build/notiflix-report-aio';
 import { fetchSearchAPI, optionsListNews, URL_LIST_NEWS } from './app/newsAPI';
 import { setImages, setTitleImages } from './app/setImages';
 import { createMarkupArticle, insertContent } from './app/createMarkup';
 
 const list = document.querySelector('[data-list]');
-console.log(list);
 const form = document.querySelector('#form');
 
-form.addEventListener('submit', debounce(onSubmit), 300);
+// add debounce if use only input without form
+// form.addEventListener('input', debounce(onSubmit), 300);
+form.addEventListener('submit', onSubmit);
 
 function onSubmit(e) {
   e.preventDefault();
 
   const value = e.currentTarget.elements.news.value.trim();
-  console.log(value);
+  //console.log(value);
 
   fetchSearchAPI(value)
     .then(({ results }) => {
@@ -61,16 +63,20 @@ function onSubmit(e) {
 }
 
 function onError(err) {
-  console.log(err);
+  Report.failure(
+    '🥺 Ooops...',
+    'Articles not found... Please, search another article.',
+    'Okay'
+  );
 }
 
 fetch(URL_LIST_NEWS)
   .then(response => response.json())
   .then(({ results }) => {
-    // if (!ok) {
+    // if (!status.ok) {
     //   throw new Error(`Error fetching`);
     // }
-    console.log(results);
+    //console.log(results);
     insertContent(results);
   })
   .catch(onError)
