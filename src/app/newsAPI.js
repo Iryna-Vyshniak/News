@@ -1,29 +1,7 @@
-// ----- NEWS DATA ----------------------------------------------------------------
+// ----- NEWS DATA ---------------------------------
 export function fetchSearchAPI(query) {
-  const SEARCH_URL = `https://newsdata.io/api/1/news?apikey=pub_18497859bbccdd32bf21739a29c0d99c7cd35&category=top,politics,world,environment,entertainment&language=uk,en&q=${query}`;
+  const SEARCH_URL = `https://newsdata.io/api/1/news?apikey=pub_1872016d3bdbc1e153439b60c6c670f1f5aed&country=ua,pl,us&category=politics,science,environment,sports&language=uk,pl,en,fr&q=${query}`;
   return fetch(SEARCH_URL).then(response => response.json());
 }
 
-// --------------NEWS API----------------------------------------------------------------------------
-//const BASE_URL = `https://newsapi.org/v2/`;
-// const NEWS_API_KEY = `1572576c777b4bada530e28e03640c11`;
-
-// // SEARCH
-// export function fetchSearchAPI(query) {
-//   const SEARCH_URL = `${BASE_URL}everything?apiKey=${NEWS_API_KEY}&q=${query}&searchIn=title&from=2023-03-04&to=2023-03-05&language=en&sortBy=popularity&pageSize=24`;
-//   return fetch(SEARCH_URL).then(response => response.json());
-// }
-
-// ----------------------------------------------------------------
-export const URL_LIST_NEWS = `https://newsdata.io/api/1/news?apikey=pub_18497859bbccdd32bf21739a29c0d99c7cd35&country=ua&category=top&language=uk`;
-
-// --------------NEWS API----------------------------------------------------------------------------
-
-// export const URL_LIST_NEWS = `${BASE_URL}top-headlines?country=ua&pageSize=20`;
-
-// // LIST NEWS
-// export const optionsListNews = {
-//   headers: {
-//     'X-Api-Key': `1572576c777b4bada530e28e03640c11`,
-//   },
-// };
+export const URL_LIST_NEWS = `https://newsdata.io/api/1/news?apikey=pub_1872016d3bdbc1e153439b60c6c670f1f5aed&country=ua&category=top&language=uk`;
