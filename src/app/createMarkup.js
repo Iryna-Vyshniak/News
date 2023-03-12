@@ -1,15 +1,12 @@
-import { setImages, setTitleImages } from './setImages';
-
 const list = document.querySelector('[data-list]');
 
-// ----- main page -------------------------------------------------------------------------
+//! ----- main page -------------------------
 
 // 1
 const createListItem = ({
   creator,
   title,
   pubDate,
-  content,
   link,
   keywords,
   source_id,
@@ -23,9 +20,6 @@ const createListItem = ({
  <div class="card__content-wrapper">
   <h2 class="card__title">${title}</h2>
  ${description ? `<p class="card__descr">${description.slice(0, 250)}</p>` : ''}
- <div class="content-wrapper">
- ${content ? `<p class="card__content">${content}</p>` : ''}
- </div>
  <div class="card__link-border">
  <a class="card__link" href="${link}" target="_blank">Read more</a>
  </div>
@@ -36,6 +30,38 @@ ${creator ? `<p class="card__author">${creator}</p>` : ''}
   </div>
 </li>
 `;
+// // 2
+// const createListItem = ({
+//   creator,
+//   title,
+//   pubDate,
+//   content,
+//   link,
+//   keywords,
+//   source_id,
+//   description,
+// }) => /* html */ `
+// <li class="news__card--main card--main stacked featured">
+// <div class="card__category-data">
+// <span class="card__category">${keywords}</span>
+// <span class="card__date">${pubDate}</span>
+// </div>
+//  <div class="card__content-wrapper">
+//   <h2 class="card__title">${title}</h2>
+//  ${description ? `<p class="card__descr">${description.slice(0, 250)}</p>` : ''}
+//  <div class="content-wrapper">
+//  ${content ? `<p class="card__content">${content}</p>` : ''}
+//  </div>
+//  <div class="card__link-border">
+//  <a class="card__link" href="${link}" target="_blank">Read more</a>
+//  </div>
+// <div class="card__category-info">
+// ${creator ? `<p class="card__author">${creator}</p>` : ''}
+// <p class="card__source">${source_id}</p>
+// </div>
+//   </div>
+// </li>
+// `;
 
 // 2
 const generateContent = array =>
@@ -47,41 +73,7 @@ export const insertContent = array => {
   list.innerHTML = result;
 };
 
-// --------------NEWS API----------------------------------------------------------------------------
-// // 1
-// const createListItem = ({
-//   author,
-//   title,
-//   publishedAt,
-//   description,
-//   url,
-//   source: { id, name },
-// }) => /* html */ `
-// <li class="news__card--main card--main stacked featured">
-// <div class="card__category-data">
-// <span class="card__category">${name}</span>
-// <span class="card__date">${publishedAt.split('T').join(' ').slice(0, -4)}</span>
-// </div>
-//  <div class="card__content-wrapper">
-//   <h2 class="card__title">${title}</h2>
-//  ${description ? `<p class="card__desc">${description}</p>` : ''}
-// <p class="card__author">${author ?? 'Anonymous'}</p>
-//   <a class="card__link" href="${url}" target="_blank">Read more</a>
-//   </div>
-// </li>
-// `;
-
-// // 2
-// const generateContent = array =>
-//   array?.reduce((acc, item) => acc + createListItem(item), '');
-
-// //3 finally function to generate content
-// export const insertContent = array => {
-//   const result = generateContent(array);
-//   list.innerHTML = result;
-// };
-
-// ----- for search -------------------------------------------------------------------------
+// ----- for search --------------------
 
 export function createMarkupArticle({
   image_url,
@@ -105,10 +97,10 @@ export function createMarkupArticle({
         image_url
           ? `
       <div class="card__image">
-        <img src="${image_url}" alt="${keywords}" loading="lazy" />
+        <img src="${image_url}" alt="${keywords}"/>
       </div>`
           : `<div class="card__image">
-        <img src="${defaultImg}" alt="${keywords}" loading="lazy" />
+        <img src="${defaultImg}" alt="${keywords}"/>
       </div>`
       }
       <div class="card__content-wrapper">
@@ -132,7 +124,8 @@ export function createMarkupArticle({
     </li>
 `;
 }
-// // ----- for search NEWS API ----------------------------------------------------------------------
+
+// //! ----- for search NEWS API ---------
 
 // export function createMarkupArticle({
 //   author,
@@ -168,3 +161,66 @@ export function createMarkupArticle({
 
 //{ <p class="news__desc">${description ? description : ''}</p> } => doesn`t good variant for semantic
 //   <p class="news__author">${author ?? ''}</p>
+
+//! -------------- NEWS API------------------
+// // 1
+// const createListItem = ({
+//   author,
+//   title,
+//   publishedAt,
+//   description,
+//   url,
+//   source: { id, name },
+// }) => /* html */ `
+// <li class="news__card--main card--main stacked featured">
+// <div class="card__category-data">
+// <span class="card__category">${name}</span>
+// <span class="card__date">${publishedAt.split('T').join(' ').slice(0, -4)}</span>
+// </div>
+//  <div class="card__content-wrapper">
+//   <h2 class="card__title">${title}</h2>
+//  ${description ? `<p class="card__desc">${description}</p>` : ''}
+// <p class="card__author">${author ?? 'Anonymous'}</p>
+//   <a class="card__link" href="${url}" target="_blank">Read more</a>
+//   </div>
+// </li>
+// `;
+
+// // 2
+// const generateContent = array =>
+//   array?.reduce((acc, item) => acc + createListItem(item), '');
+
+// //3 finally function to generate content
+// export const insertContent = array => {
+//   const result = generateContent(array);
+//   list.innerHTML = result;
+// };
+
+//! --- TIMES-----------------------
+// const createListItem = ({
+//   copyright,
+//   title,
+//   updated,
+//   url,
+//   section,
+//   source,
+//   abstract,
+// }) => /* html */ `
+// <li class="news__card--main card--main stacked featured">
+// <div class="card__category-data">
+// <span class="card__category">${section}</span>
+// <span class="card__date">${updated}</span>
+// </div>
+//  <div class="card__content-wrapper">
+//   <h2 class="card__title">${title}</h2>
+//  ${abstract ? `<p class="card__descr">${abstract}</p>` : ''}
+//  <div class="card__link-border">
+//  <a class="card__link" href="${url}" target="_blank">Read more</a>
+//  </div>
+// <div class="card__category-info">
+// ${copyright ? `<p class="card__author">${copyright}</p>` : ''}
+// <p class="card__source">${source}</p>
+// </div>
+//   </div>
+// </li>
+// `;
