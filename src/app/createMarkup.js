@@ -1,9 +1,7 @@
-const list = document.querySelector('[data-list]');
-
 //! ----- main page -------------------------
 
 // 1
-const createListItem = ({
+const createMainPageContent = ({
   creator,
   title,
   pubDate,
@@ -64,18 +62,18 @@ ${creator ? `<p class="card__author">${creator}</p>` : ''}
 // `;
 
 // 2
-const generateContent = array =>
-  array?.reduce((acc, item) => acc + createListItem(item), '');
+export const generateMainNewsContent = array =>
+  array?.reduce((acc, item) => acc + createMainPageContent(item), '');
 
-//3 finally function to generate content
-export const insertContent = array => {
-  const result = generateContent(array);
-  list.innerHTML = result;
-};
+// //3 finally function to generate content
+// export const insertContent = array => {
+//   const result = generateContent(array);
+//   list.innerHTML = result;
+// };
 
 // ----- for search --------------------
 
-export function createMarkupArticle({
+function createSearchMarkupArticle({
   image_url,
   creator,
   title,
@@ -125,7 +123,10 @@ export function createMarkupArticle({
 `;
 }
 
-// //! ----- for search NEWS API ---------
+export const generateSearchNewsContent = array =>
+  array?.reduce((acc, item) => acc + createSearchMarkupArticle(item), '');
+
+//! ----- for search NEWS API ---------
 
 // export function createMarkupArticle({
 //   author,
