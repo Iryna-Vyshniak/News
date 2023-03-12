@@ -1,55 +1,46 @@
 import debounce from 'lodash.debounce';
 import { Report } from 'notiflix/build/notiflix-report-aio';
-import { fetchSearchAPI, URL_LIST_NEWS } from './app/newsAPI';
-import { createMarkupArticle, insertContent } from './app/createMarkup';
+import {
+  generateSearchNewsContent,
+  generateMainNewsContent,
+} from './app/createMarkup';
+import { NewsApiService } from './app/newsAPI';
+
+const newApiService = new NewsApiService();
 
 const list = document.querySelector('[data-list]');
 const input = document.querySelector('#search-input');
 const form = document.querySelector('#form');
-const selectCountry = form.querySelector('#country');
-const selectLanguage = form.querySelector('#language');
-const selectCategory = form.querySelector('#category');
 
-// console.log(form, selectCountry, selectLanguage, selectCategory);
-
-input.addEventListener('input', debounce(onInputSearch), 300);
+input.addEventListener('input', debounce(onInputSearch), 500);
 form.addEventListener('submit', onSubmit);
 
-// !----------- createURL -----------------------------
+// !------- Main Page --------------------------------
 
-function createURL() {
-  const countries = selectCountry.value;
-  const categories = selectCategory.value;
-  const lang = selectLanguage.value;
-
-  console.log(categories, countries, lang);
-
-  const url = `https://newsdata.io/api/1/news?apikey=pub_1872016d3bdbc1e153439b60c6c670f1f5aed&country=${countries}&category=${categories}&language=${lang}`;
-  return url;
-}
+newApiService
+  .fetchApiForMainPage()
+  .then(({ results }) => {
+    console.log(results);
+    if (!results.length) {
+      throw new Error('Not articles found');
+    }
+    insertContent(results, generateMainNewsContent);
+  })
+  .catch(onError);
 
 // !--------- CHECK CATEGORY AND SEARCH ---------------
 
 function onSubmit(e) {
   e.preventDefault();
 
-  const url = createURL();
-  return fetch(url)
-    .then(response => response.json())
+  return newApiService
+    .fetchSearchCategoryAPI()
     .then(({ results }) => {
       console.log(results.length);
-
       if (!results.length) {
         throw new Error('Not articles found');
       }
-
-      return results.reduce(
-        (markup, article) => markup + createMarkupArticle(article),
-        ''
-      );
-    })
-    .then(markup => {
-      list.innerHTML = markup;
+      insertContent(results, generateSearchNewsContent);
     })
     .catch(onError)
     .finally(() => {
@@ -59,21 +50,16 @@ function onSubmit(e) {
 
 // !------INPUT SEARCH -------------------------
 function onInputSearch(e) {
-  const value = input.value.trim();
+  newApiService.query = e.target.value.trim();
   //console.log(value);
-  fetchSearchAPI(value)
+  newApiService
+    .fetchSearchAPI()
     .then(({ results }) => {
-      console.log(results.length);
+      // console.log(results.length);
       if (!results.length) {
         throw new Error('Not articles found');
       }
-      return results.reduce(
-        (markup, article) => markup + createMarkupArticle(article),
-        ''
-      );
-    })
-    .then(markup => {
-      list.innerHTML = markup;
+      insertContent(results, generateSearchNewsContent);
     })
     .catch(onError)
     .finally(() => {
@@ -121,16 +107,9 @@ function checkSymbols(maxNum) {
   });
 }
 
-//! -------- main page -----------------------------------
-fetch(URL_LIST_NEWS)
-  .then(response => {
-    if (!response.ok) {
-      throw new Error(`Error fetching`);
-    }
-    return response.json();
-  })
-  .then(({ results }) => {
-    console.log(results);
-    insertContent(results);
-  })
-  .catch(onError);
+// !------ generateContent --------------------------------
+
+const insertContent = (array, generateMarkup) => {
+  const result = generateMarkup(array);
+  list.innerHTML = result;
+};
